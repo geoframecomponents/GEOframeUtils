@@ -45,4 +45,9 @@ public class GEOunitsTransform {
 
     }
 
+    public static Double minutes2seconds(final Double inputValue) {
+        final int secondsOverMinutes = 60;
+        return inputValue * secondsOverMinutes;
+    }
+
 }
