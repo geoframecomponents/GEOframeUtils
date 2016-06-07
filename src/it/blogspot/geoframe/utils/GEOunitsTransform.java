@@ -18,7 +18,7 @@
  */
 package it.blogspot.geoframe.utils;
 
-public class UnitsTransform {
+public class GEOunitsTransform {
 
     public static Double percentage2radiant(Double inputValue) {
         if (inputValue > 1) inputValue = normalizeToOne(inputValue);
