@@ -21,7 +21,9 @@ package it.blogspot.geoframe.utils;
 
 public class GEOconstants {
 
-	/** Definition of specific weight of water [N/m^3] */
+	/**  
+	 * Definition of specific weight of water [N/m^3]. 
+	 */
 	public static final double WSPECIFICWEIGHT = 9800;
 
 }
