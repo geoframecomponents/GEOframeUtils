@@ -50,4 +50,14 @@ public class GEOunitsTransform {
         return inputValue * secondsOverMinutes;
     }
 
+    public static Double hours2minutes(final Double inputValue) {
+        final int minutesOverHours = 60;
+        return inputValue * minutesOverHours;
+    }
+
+    public static Double meters2centimeters(final Double inputValue) {
+        final int centimetersOverMeters = 100;
+        return inputValue * centimetersOverMeters;
+    }
+
 }
