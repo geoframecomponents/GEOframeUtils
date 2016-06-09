@@ -29,7 +29,8 @@ package it.blogspot.geoframe.utils;
 public class GEOgeometry {
 
     public static Double computeLength3D(final double startPointX, final double startPointY, final double startPointZ,
-                                         final double endPointX, final double endPointY, final double endPointZ) {
+                                         final double endPointX, final double endPointY, final double endPointZ)
+    {
         return Math.sqrt(Math.pow(horizontalProjection(startPointX, startPointY, endPointX, endPointY), 2) +
                          Math.pow(computeAltitude(startPointZ, endPointZ), 2)); 
     }
@@ -38,12 +39,22 @@ public class GEOgeometry {
         return startPointZ - endPointZ;
     }
 
-    public static Double computeLength2D(final double startPointX, final double startPointY, final double endPointX, final double endPointY) {
+    public static Double computeLength2D(final double startPointX, final double startPointY,
+                                         final double endPointX, final double endPointY)
+    {
         return horizontalProjection(startPointX, startPointY, endPointX, endPointY);
     }
 
-    public static Double horizontalProjection(final double startPointX, final double startPointY, final double endPointX, final double endPointY) {
+    public static Double horizontalProjection(final double startPointX, final double startPointY,
+                                              final double endPointX, final double endPointY)
+    {
         return Math.sqrt(Math.pow(startPointX - endPointX, 2) + Math.pow(startPointY - endPointY, 2));
+    }
+
+    public static Double computeSlope(final double startPointX, final double startPointY, final double startPointZ,
+                                      final double endPointX, final double endPointY, final double endPointZ)
+    {
+        return computeAltitude(startPointZ,endPointZ) / horizontalProjection(startPointX, startPointY, endPointX, endPointY);
     }
 
 }
