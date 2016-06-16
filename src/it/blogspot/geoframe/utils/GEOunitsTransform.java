@@ -56,8 +56,8 @@ public class GEOunitsTransform {
     }
 
     public static Double millimiters2meters(final Double inputValue) {
-        final double metersOverMillimiters = 0.001;
-        return inputValue * metersOverMillimiters;
+        final int millimitersOverMeters = 1000;
+        return inputValue / millimitersOverMeters;
     }
 
     public static Double meters2centimeters(final Double inputValue) {
@@ -66,8 +66,8 @@ public class GEOunitsTransform {
     }
 
     public static Double centimeters2meters(final Double inputValue) {
-        final double metersOverCentimeters = 0.01;
-        return inputValue * metersOverCentimeters;
+        final int centimitersOverMeters = 100;
+        return inputValue / centimitersOverMeters;
     }
 
 }
