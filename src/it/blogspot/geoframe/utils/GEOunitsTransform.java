@@ -60,4 +60,9 @@ public class GEOunitsTransform {
         return inputValue * centimetersOverMeters;
     }
 
+    public static Double centimeters2meters(final Double inputValue) {
+        final double metersOverCentimeters = 0.01;
+        return inputValue * metersOverCentimeters;
+    }
+
 }
