@@ -55,6 +55,11 @@ public class GEOunitsTransform {
         return inputValue * minutesOverHours;
     }
 
+    public static Double millimiters2meters(final Double inputValue) {
+        final double metersOverMillimiters = 0.001;
+        return inputValue * metersOverMillimiters;
+    }
+
     public static Double meters2centimeters(final Double inputValue) {
         final int centimetersOverMeters = 100;
         return inputValue * centimetersOverMeters;
