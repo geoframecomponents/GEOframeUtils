@@ -28,12 +28,15 @@ package it.blogspot.geoframe.utils;
  */
 public class GEOunitsTransform {
 
-    public static Double percentage2radiant(Double inputValue) {
+    public static double percentage2radiant(Double inputValue) {
+        GEOchecks.isNull(inputValue); // precondition
+
         if (inputValue > 1) inputValue = normalizeToOne(inputValue);
         return inputValue * Math.PI/4;
     }
 
-    public static Double normalizeToOne(final Double inputValue) {
+    public static double normalizeToOne(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
 
         if (inputValue < 100)
             return inputValue / 100;
@@ -45,37 +48,51 @@ public class GEOunitsTransform {
 
     }
 
-    public static Double minutes2seconds(final Double inputValue) {
+    public static double minutes2seconds(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
+
         final int secondsOverMinutes = 60;
         return inputValue * secondsOverMinutes;
     }
 
-    public static Double hours2minutes(final Double inputValue) {
+    public static double hours2minutes(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
+
         final int minutesOverHours = 60;
         return inputValue * minutesOverHours;
     }
 
-    public static Double millimiters2meters(final Double inputValue) {
+    public static double millimiters2meters(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
+
         final int millimitersOverMeters = 1000;
         return inputValue / millimitersOverMeters;
     }
 
-    public static Double meters2centimeters(final Double inputValue) {
+    public static double meters2centimeters(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
+
         final int centimetersOverMeters = 100;
         return inputValue * centimetersOverMeters;
     }
 
-    public static Double centimeters2meters(final Double inputValue) {
+    public static double centimeters2meters(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
+
         final int centimitersOverMeters = 100;
         return inputValue / centimitersOverMeters;
     }
 
-    public static Double cubicMeters2liters(final Double inputValue) {
+    public static double cubicMeters2liters(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
+
         final int litersOverCubicMeters = 1000;
         return inputValue * litersOverCubicMeters;
     }
 
-    public static Double hectars2meters(final Double inputValue) {
+    public static double hectars2meters(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
+
         final int metersOverHectares = 10000;
         return inputValue * metersOverHectares;
     }
