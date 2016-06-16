@@ -75,4 +75,9 @@ public class GEOunitsTransform {
         return inputValue * litersOverCubicMeters;
     }
 
+    public static Double hectars2meters(final Double inputValue) {
+        final int metersOverHectares = 10000;
+        return inputValue * metersOverHectares;
+    }
+
 }
