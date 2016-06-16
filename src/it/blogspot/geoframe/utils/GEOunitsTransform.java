@@ -55,6 +55,13 @@ public class GEOunitsTransform {
         return inputValue * secondsOverMinutes;
     }
 
+    public static double seconds2minutes(final Double inputValue) {
+        GEOchecks.isNull(inputValue); // precondition
+
+        final int secondsOverMinutes = 60;
+        return inputValue / secondsOverMinutes;
+    }
+
     public static double hours2minutes(final Double inputValue) {
         GEOchecks.isNull(inputValue); //precondition
 
