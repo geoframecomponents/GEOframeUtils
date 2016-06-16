@@ -70,4 +70,9 @@ public class GEOunitsTransform {
         return inputValue / centimitersOverMeters;
     }
 
+    public static Double cubicMeters2liters(final Double inputValue) {
+        final int litersOverCubicMeters = 1000;
+        return inputValue * litersOverCubicMeters;
+    }
+
 }
