@@ -1,8 +1,9 @@
 /*
- * This file is part of JGrasstools (http://www.jgrasstools.org)
- * (C) HydroloGIS - www.hydrologis.com 
- * 
- * JGrasstools is free software: you can redistribute it and/or modify
+ * GNU GPL v3 License
+ *
+ * Copyright 2016 GEOframe (Riccardo Rigon)
+ *
+ * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
@@ -174,12 +175,7 @@ public class DoGridMesh extends JGTModel {
                     System.out.println(rowL.get(i));
                     System.out.println(colL.get(i));
 
-                    // colL.remove(i);
-                    // rowL.remove(i);
-                    // valueL.remove(i);
                     valueL.set(i, -9999);
-                    // rowL.set(i, -9999);
-                    // colL.set(i, -9999);
 
                 }
             }
