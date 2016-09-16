@@ -53,186 +53,181 @@ import org.jgrasstools.gears.utils.coverage.CoverageUtilities;
 @License("")
 public class DoGridMesh extends JGTModel {
 
-	@Description()
-	@In
-	public GridCoverage2D inSlope = null;
+    @Description()
+    @In
+    public GridCoverage2D inSlope = null;
 
-	@Description()
-	@In
-	public boolean doSimmetricMatrix = true;
+    @Description()
+    @In
+    public boolean doSimmetricMatrix = true;
 
-	@Description()
-	@Out
-	public GridCoverage2D outShalstab = null;
+    @Description()
+    @Out
+    public GridCoverage2D outShalstab = null;
 
-	public final double EPS = 0.01;
+    public final double EPS = 0.01;
 
-	@Execute
-	public void process() throws Exception {
-		// if (!concatOr(outShalstab == null, doReset)) {
-		// return;
-		// }
-		checkNull(inSlope);
+    @Execute
+    public void process() throws Exception {
+        checkNull(inSlope);
+        RenderedImage slopeRI = inSlope.getRenderedImage();
+        qcrit(slopeRI);
+    }
 
-		RenderedImage slopeRI = inSlope.getRenderedImage();
+    /**
+     * Calculates the trasmissivity in every pixel of the map.
+     */
+    private void qcrit(RenderedImage slope) {
 
-		qcrit(slopeRI);
-	}
+        HashMap<String, Double> regionMap = CoverageUtilities
+                .getRegionParamsFromGridCoverage(inSlope);
+        int cols = regionMap.get(CoverageUtilities.COLS).intValue();
+        int rows = regionMap.get(CoverageUtilities.ROWS).intValue();
+        WritableRaster classiWR = CoverageUtilities.createDoubleWritableRaster(
+                cols, rows, null, null, null);
+        WritableRandomIter classiIter = RandomIterFactory.createWritable(
+                classiWR, null);
+        RandomIter slopeRI = RandomIterFactory.create(slope, null);
+        int contaPoligoni = 0;
+        LinkedList<Integer> rowP = new LinkedList<Integer>();
+        LinkedList<Integer> colP = new LinkedList<Integer>();
+        LinkedList<Integer> valueP = new LinkedList<Integer>();
 
-	/**
-	 * Calculates the trasmissivity in every pixel of the map.
-	 */
-	private void qcrit(RenderedImage slope) {
+        for (int j = 0; j < rows; j++) {
+            for (int i = 0; i < cols; i++) {
 
-		HashMap<String, Double> regionMap = CoverageUtilities
-				.getRegionParamsFromGridCoverage(inSlope);
-		int cols = regionMap.get(CoverageUtilities.COLS).intValue();
-		int rows = regionMap.get(CoverageUtilities.ROWS).intValue();
-		WritableRaster classiWR = CoverageUtilities.createDoubleWritableRaster(
-				cols, rows, null, null, null);
-		WritableRandomIter classiIter = RandomIterFactory.createWritable(
-				classiWR, null);
-		RandomIter slopeRI = RandomIterFactory.create(slope, null);
-		int contaPoligoni = 0;
-		LinkedList<Integer> rowP = new LinkedList<Integer>();
-		LinkedList<Integer> colP = new LinkedList<Integer>();
-		LinkedList<Integer> valueP = new LinkedList<Integer>();
+                double slopeValue = slopeRI.getSampleDouble(i, j, 0);
 
-		for (int j = 0; j < rows; j++) {
-			for (int i = 0; i < cols; i++) {
+                if (!isNovalue(slopeValue)) {
+                    contaPoligoni += 1;
+                    rowP.add(j);
+                    colP.add(i);
+                    valueP.add(contaPoligoni);
+                    classiIter.setSample(i, j, 0, contaPoligoni);
 
-				double slopeValue = slopeRI.getSampleDouble(i, j, 0);
+                } else {
+                    classiIter.setSample(i, j, 0, doubleNovalue);
+                }
+            }
+        }
+        pm.done();
 
-				if (!isNovalue(slopeValue)) {
-					contaPoligoni += 1;
-					rowP.add(j);
-					colP.add(i);
-					valueP.add(contaPoligoni);
-					classiIter.setSample(i, j, 0, contaPoligoni);
+        outShalstab = CoverageUtilities.buildCoverage("classi", classiWR,
+                regionMap, inSlope.getCoordinateReferenceSystem());
 
-				} else {
-					classiIter.setSample(i, j, 0, doubleNovalue);
-				}
-			}
-		}
-		pm.done();
+        LinkedList<Integer> rowL = new LinkedList<Integer>();
+        LinkedList<Integer> colL = new LinkedList<Integer>();
+        LinkedList<Integer> valueL = new LinkedList<Integer>();
 
-		outShalstab = CoverageUtilities.buildCoverage("classi", classiWR,
-				regionMap, inSlope.getCoordinateReferenceSystem());
+        RenderedImage p = outShalstab.getRenderedImage();
+        RandomIter pRI = RandomIterFactory.create(p, null);
 
-		LinkedList<Integer> rowL = new LinkedList<Integer>();
-		LinkedList<Integer> colL = new LinkedList<Integer>();
-		LinkedList<Integer> valueL = new LinkedList<Integer>();
+        for (int j = 0; j < rows; j++) {
+            for (int i = 0; i < cols; i++) {
+                System.out.println(pRI.getSampleDouble(i, j, 0));
+                if (!isNovalue(pRI.getSampleDouble(i, j, 0))) {
+                    if ((i + 1) < cols) {
 
-		RenderedImage p = outShalstab.getRenderedImage();
-		RandomIter pRI = RandomIterFactory.create(p, null);
+                        if (pRI.getSampleDouble(i + 1, j, 0) != doubleNovalue) {
 
-		for (int j = 0; j < rows; j++) {
-			for (int i = 0; i < cols; i++) {
-				System.out.println(pRI.getSampleDouble(i, j, 0));
-				if (!isNovalue(pRI.getSampleDouble(i, j, 0))) {
-					if ((i + 1) < cols) {
+                            rowL.add((int) pRI.getSampleDouble(i, j, 0));
+                            colL.add((int) pRI.getSampleDouble(i + 1, j, 0));
+                            valueL.add(2);
 
-						if (pRI.getSampleDouble(i + 1, j, 0) != doubleNovalue) {
+                        }
+                    }
+                    if ((i - 1) > 0) {
+                        if (pRI.getSampleDouble(i - 1, j, 0) != doubleNovalue) {
 
-							rowL.add((int) pRI.getSampleDouble(i, j, 0));
-							colL.add((int) pRI.getSampleDouble(i + 1, j, 0));
-							valueL.add(2);
+                            rowL.add((int) pRI.getSampleDouble(i, j, 0));
+                            colL.add((int) pRI.getSampleDouble(i - 1, j, 0));
+                            valueL.add(2);
 
-						}
-					}
-					if ((i - 1) > 0) {
-						if (pRI.getSampleDouble(i - 1, j, 0) != doubleNovalue) {
+                        }
+                    }
+                    if ((j + 1) < rows) {
+                        if (pRI.getSampleDouble(i, j + 1, 0) != doubleNovalue) {
 
-							rowL.add((int) pRI.getSampleDouble(i, j, 0));
-							colL.add((int) pRI.getSampleDouble(i - 1, j, 0));
-							valueL.add(2);
+                            rowL.add((int) pRI.getSampleDouble(i, j, 0));
+                            colL.add((int) pRI.getSampleDouble(i, j + 1, 0));
+                            valueL.add(2);
 
-						}
-					}
-					if ((j + 1) < rows) {
-						if (pRI.getSampleDouble(i, j + 1, 0) != doubleNovalue) {
+                        }
+                    }
+                    if ((j - 1) > 0) {
+                        if (pRI.getSampleDouble(i, j - 1, 0) != doubleNovalue) {
 
-							rowL.add((int) pRI.getSampleDouble(i, j, 0));
-							colL.add((int) pRI.getSampleDouble(i, j + 1, 0));
-							valueL.add(2);
+                            rowL.add((int) pRI.getSampleDouble(i, j, 0));
+                            colL.add((int) pRI.getSampleDouble(i, j - 1, 0));
+                            valueL.add(2);
 
-						}
-					}
-					if ((j - 1) > 0) {
-						if (pRI.getSampleDouble(i, j - 1, 0) != doubleNovalue) {
+                        }
+                    }
 
-							rowL.add((int) pRI.getSampleDouble(i, j, 0));
-							colL.add((int) pRI.getSampleDouble(i, j - 1, 0));
-							valueL.add(2);
+                }
+            }
+        }
 
-						}
-					}
+        if (doSimmetricMatrix) {
+            for (int i = 0; i < colL.size(); i++) {
+                if (rowL.get(i) > colL.get(i)) {
+                    System.out.println(rowL.get(i));
+                    System.out.println(colL.get(i));
 
-				}
-			}
-		}
+                    // colL.remove(i);
+                    // rowL.remove(i);
+                    // valueL.remove(i);
+                    valueL.set(i, -9999);
+                    // rowL.set(i, -9999);
+                    // colL.set(i, -9999);
 
-		if (doSimmetricMatrix) {
-			for (int i = 0; i < colL.size(); i++) {
-				if (rowL.get(i) > colL.get(i)) {
-					System.out.println(rowL.get(i));
-					System.out.println(colL.get(i));
+                }
+            }
 
-					// colL.remove(i);
-					// rowL.remove(i);
-					// valueL.remove(i);
-					valueL.set(i, -9999);
-					// rowL.set(i, -9999);
-					// colL.set(i, -9999);
+        }
+        int cnt = 0;
+        for (int i = 0; i < valueL.size(); i++) {
+            if (valueL.get(i) != -9999) {
+                cnt++;
+                valueL.set(i, cnt);
+            }
 
-				}
-			}
+        }
 
-		}
-		int cnt = 0;
-		for (int i = 0; i < valueL.size(); i++) {
-			if (valueL.get(i) != -9999) {
-				cnt++;
-				valueL.set(i, cnt);
-			}
+        LinkedList<Integer> rowLnew = new LinkedList<Integer>();
+        LinkedList<Integer> colLnew = new LinkedList<Integer>();
+        LinkedList<Integer> valueLnew = new LinkedList<Integer>();
 
-		}
+        if (doSimmetricMatrix) {
+            for (int i = 0; i < valueL.size(); i++) {
+                if (valueL.get(i) != -9999) {
+                    rowLnew.add(rowL.get(i));
+                    colLnew.add(colL.get(i));
+                    valueLnew.add(valueL.get(i));
 
-		LinkedList<Integer> rowLnew = new LinkedList<Integer>();
-		LinkedList<Integer> colLnew = new LinkedList<Integer>();
-		LinkedList<Integer> valueLnew = new LinkedList<Integer>();
+                    rowLnew.add(colL.get(i));
+                    colLnew.add(rowL.get(i));
+                    valueLnew.add(valueL.get(i));
 
-		if (doSimmetricMatrix) {
-			for (int i = 0; i < valueL.size(); i++) {
-				if (valueL.get(i) != -9999) {
-					rowLnew.add(rowL.get(i));
-					colLnew.add(colL.get(i));
-					valueLnew.add(valueL.get(i));
+                }
 
-					rowLnew.add(colL.get(i));
-					colLnew.add(rowL.get(i));
-					valueLnew.add(valueL.get(i));
+            }
 
-				}
+        } else {
+            rowLnew = rowL;
+            colLnew = colL;
+            valueLnew = valueL;
+        }
 
-			}
+        for (int i = 1; i < contaPoligoni + 1; i++) {
+            rowLnew.add(i);
+            colLnew.add(i);
+            valueLnew.add(-1);
+        }
+        System.out.println("LinkedList contains : " + colLnew);
+        System.out.println("LinkedList contains : " + rowLnew);
+        System.out.println("LinkedList contains : " + valueLnew);
 
-		} else {
-			rowLnew = rowL;
-			colLnew = colL;
-			valueLnew = valueL;
-		}
-
-		for (int i = 1; i < contaPoligoni + 1; i++) {
-			rowLnew.add(i);
-			colLnew.add(i);
-			valueLnew.add(-1);
-		}
-		System.out.println("LinkedList contains : " + colLnew);
-		System.out.println("LinkedList contains : " + rowLnew);
-		System.out.println("LinkedList contains : " + valueLnew);
-
-		System.out.print("ciao");
-	}
+        System.out.print("ciao");
+    }
 }
