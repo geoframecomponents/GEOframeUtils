@@ -20,7 +20,6 @@ package it.blogspot.geoframe.utils.mesh;
 
 import it.blogspot.geoframe.utils.GEOchecks;
 import it.blogspot.geoframe.utils.GEOconstants;
-import static org.jgrasstools.gears.libs.modules.JGTConstants.isNovalue;
 
 import java.awt.image.RenderedImage;
 import java.awt.image.WritableRaster;
@@ -99,7 +98,7 @@ public class DoGridMesh {
 
                 double slopeValue = slopeRI.getSampleDouble(i, j, 0);
 
-                if (!isNovalue(slopeValue)) {
+                if (!GEOchecks.isNovalue(slopeValue)) {
                     contaPoligoni += 1;
                     rowP.add(j);
                     colP.add(i);
@@ -125,7 +124,7 @@ public class DoGridMesh {
         for (int j = 0; j < rows; j++) {
             for (int i = 0; i < cols; i++) {
                 System.out.println(pRI.getSampleDouble(i, j, 0));
-                if (!isNovalue(pRI.getSampleDouble(i, j, 0))) {
+                if (!GEOchecks.isNovalue(pRI.getSampleDouble(i, j, 0))) {
                     if ((i + 1) < cols) {
 
                         if (pRI.getSampleDouble(i + 1, j, 0) != GEOconstants.DOUBLENOVALUE) {
