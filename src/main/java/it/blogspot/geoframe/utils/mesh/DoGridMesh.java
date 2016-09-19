@@ -19,7 +19,7 @@
 package it.blogspot.geoframe.utils.mesh;
 
 import it.blogspot.geoframe.utils.GEOchecks;
-import static org.jgrasstools.gears.libs.modules.JGTConstants.doubleNovalue;
+import it.blogspot.geoframe.utils.GEOconstants;
 import static org.jgrasstools.gears.libs.modules.JGTConstants.isNovalue;
 
 import java.awt.image.RenderedImage;
@@ -107,7 +107,7 @@ public class DoGridMesh {
                     classiIter.setSample(i, j, 0, contaPoligoni);
 
                 } else {
-                    classiIter.setSample(i, j, 0, doubleNovalue);
+                    classiIter.setSample(i, j, 0, GEOconstants.DOUBLENOVALUE);
                 }
             }
         }
@@ -128,7 +128,7 @@ public class DoGridMesh {
                 if (!isNovalue(pRI.getSampleDouble(i, j, 0))) {
                     if ((i + 1) < cols) {
 
-                        if (pRI.getSampleDouble(i + 1, j, 0) != doubleNovalue) {
+                        if (pRI.getSampleDouble(i + 1, j, 0) != GEOconstants.DOUBLENOVALUE) {
 
                             rowL.add((int) pRI.getSampleDouble(i, j, 0));
                             colL.add((int) pRI.getSampleDouble(i + 1, j, 0));
@@ -137,7 +137,7 @@ public class DoGridMesh {
                         }
                     }
                     if ((i - 1) > 0) {
-                        if (pRI.getSampleDouble(i - 1, j, 0) != doubleNovalue) {
+                        if (pRI.getSampleDouble(i - 1, j, 0) != GEOconstants.DOUBLENOVALUE) {
 
                             rowL.add((int) pRI.getSampleDouble(i, j, 0));
                             colL.add((int) pRI.getSampleDouble(i - 1, j, 0));
@@ -146,7 +146,7 @@ public class DoGridMesh {
                         }
                     }
                     if ((j + 1) < rows) {
-                        if (pRI.getSampleDouble(i, j + 1, 0) != doubleNovalue) {
+                        if (pRI.getSampleDouble(i, j + 1, 0) != GEOconstants.DOUBLENOVALUE) {
 
                             rowL.add((int) pRI.getSampleDouble(i, j, 0));
                             colL.add((int) pRI.getSampleDouble(i, j + 1, 0));
@@ -155,7 +155,7 @@ public class DoGridMesh {
                         }
                     }
                     if ((j - 1) > 0) {
-                        if (pRI.getSampleDouble(i, j - 1, 0) != doubleNovalue) {
+                        if (pRI.getSampleDouble(i, j - 1, 0) != GEOconstants.DOUBLENOVALUE) {
 
                             rowL.add((int) pRI.getSampleDouble(i, j, 0));
                             colL.add((int) pRI.getSampleDouble(i, j - 1, 0));
