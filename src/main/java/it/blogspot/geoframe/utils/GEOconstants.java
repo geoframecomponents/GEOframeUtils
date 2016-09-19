@@ -22,11 +22,17 @@ package it.blogspot.geoframe.utils;
  *
  *
  * @author ftt01, dallatorre.daniele@gmail.com
+ * @author sidereus, francesco.serafin.3@gmail.com
  * @version 0.1
  * @date Jun 07, 2016
  * @copyright GNU Public License v3 GWH-2b4 (Riccardo Rigon)
  */
 public class GEOconstants {
+
+    /**
+     * The default double novalue
+     */
+    public static final double DOUBLENOVALUE = Double.NaN;
 
     /**
      * Definition of specific weight of water [N/m^3].
