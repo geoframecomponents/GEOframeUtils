@@ -32,6 +32,10 @@ public class GEOchecks<T> {
         return variable.equals(null) ? true : false;
     }
 
+    public static Boolean isNovalue(final double variable) {
+        return Double.isNaN(variable);
+    }
+
     public static<T> T checkVariable(final T variable) {
         if (!isNull(variable)) return variable;
         else {
