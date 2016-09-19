@@ -18,6 +18,7 @@
  */
 package it.blogspot.geoframe.utils.mesh;
 
+import it.blogspot.geoframe.utils.GEOchecks;
 import static org.jgrasstools.gears.libs.modules.JGTConstants.doubleNovalue;
 import static org.jgrasstools.gears.libs.modules.JGTConstants.isNovalue;
 
@@ -42,7 +43,6 @@ import oms3.annotations.Out;
 import oms3.annotations.Status;
 
 import org.geotools.coverage.grid.GridCoverage2D;
-import org.jgrasstools.gears.libs.modules.JGTModel;
 import org.jgrasstools.gears.utils.coverage.CoverageUtilities;
 
 @Description()
@@ -52,7 +52,7 @@ import org.jgrasstools.gears.utils.coverage.CoverageUtilities;
 @Name("")
 @Status()
 @License("")
-public class DoGridMesh extends JGTModel {
+public class DoGridMesh {
 
     @Description()
     @In
@@ -70,7 +70,7 @@ public class DoGridMesh extends JGTModel {
 
     @Execute
     public void process() throws Exception {
-        checkNull(inSlope);
+        inSlope = GEOchecks.checkVariable(inSlope);
         RenderedImage slopeRI = inSlope.getRenderedImage();
         qcrit(slopeRI);
     }
@@ -111,7 +111,6 @@ public class DoGridMesh extends JGTModel {
                 }
             }
         }
-        pm.done();
 
         outShalstab = CoverageUtilities.buildCoverage("classi", classiWR,
                 regionMap, inSlope.getCoordinateReferenceSystem());
