@@ -16,30 +16,38 @@ if (!hasProperty('mainClass')) {
 }
 
 repositories {
-    maven { url 'http://download.osgeo.org/webdav/geotools/' }
-    maven { url 'http://maven.geo-solutions.it/' }
-    // You may define additional repositories, or even remove "mavenCentral()".
-    // Read more about repositories here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:repositories
+
+    maven {
+        // jai_core 1.1.3
+        // jai_codec 1.1.3
+        url 'http://download.osgeo.org/webdav/geotools/'
+    }
+
+    maven {
+        // hatbox 1.0.b7
+        url 'http://maven.geo-solutions.it/'
+    }
+
+    // jgt-jgrassgears 0.7.8
     mavenCentral()
-    jcenter()
+
+    // local jar files
     flatDir {
         dirs 'lib'
     }
 }
 
 dependencies {
+
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile name: 'oms-all'
+
     compile group: 'javax.media', name: 'jai_core', version: '1.1.3'
     compile group: 'javax.media', name: 'jai_codec', version: '1.1.3'
     compile group: 'org.jgrasstools', name: 'jgt-jgrassgears', version: '0.7.8'
     compile group: 'net.sourceforge.hatbox', name: 'hatbox', version: '1.0.b7'
 
-    // TODO: Add dependencies here ...
-    // You can read more about how to add dependency here:
-    //   http://www.gradle.org/docs/current/userguide/dependency_management.html#sec:how_to_declare_your_dependencies
-    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testCompile group: 'junit', name: 'junit', version: '4.10'
 
 }
