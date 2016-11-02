@@ -1,8 +1,8 @@
 # GEOframeUtils
 
-`@author` Francesco Serafin (sidereus3), francesco.serafin.3@gmail.com ![alt text](https://github.com/GrowWorkingHard/logos/blob/master/sidereus3_50X50.png "sidereus3")
+`@author` Francesco Serafin (sidereus3), francesco.serafin.3@gmail.com ![sidereus3](https://github.com/GrowWorkingHard/logos/blob/master/sidereus3_50X50.png "sidereus3")
 
-`@author` Daniele Dalla Torre (ftt01), dallatorre.daniele@gmail.com ![alt text](https://github.com/GrowWorkingHard/logos/blob/master/ftt01_50x50.png "ftt01")
+`@author` Daniele Dalla Torre (ftt01), dallatorre.daniele@gmail.com ![ftt01](https://github.com/GrowWorkingHard/logos/blob/master/ftt01_50x50.png "ftt01")
 
 `@copyright` GNU Public License v3 AboutHydrology (Riccardo Rigon)
 
