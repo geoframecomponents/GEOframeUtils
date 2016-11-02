@@ -39,5 +39,5 @@ References
 ----------
 
 .. |sidereus3| image:: https://github.com/GrowWorkingHard/logos/blob/master/sidereus3_50X50.png
-.. |ftt01| image:: https://github.com/GrowWorkingHard/logos/blob/master/ftt01_50x50.png
+.. |ftt01| image:: https://github.com/GrowWorkingHard/logos/blob/master/ftt01_50X50.png
 
