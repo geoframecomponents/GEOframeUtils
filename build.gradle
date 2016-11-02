@@ -1,18 +1,24 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+sourceCompatibility = '1.8'
 
-// NetBeans will automatically add "run" and "debug" tasks relying on the
-// "mainClass" property. You may however define the property prior executing
-// tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
-//
-// Note however, that you may define your own "run" and "debug" task if you
-// prefer. In this case NetBeans will not add these tasks but you may rely on
-// your own implementation.
-if (!hasProperty('mainClass')) {
-    ext.mainClass = ''
+// to get project version from command line, just type
+// $ gradle -PprojVersion=<version_number> build
+// default is na
+if (project.hasProperty('projVersion')) {
+      project.version = project.projVersion
+} else {
+      project.version = 'na'
+}
+
+// name with versioning of the jar file
+jar {
+    manifest {
+        attributes 'Implementation-Title' : 'Gradle Quickstart',
+                   'Implementation-Version': version
+    }
 }
 
 repositories {
