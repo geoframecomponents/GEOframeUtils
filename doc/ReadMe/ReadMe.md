@@ -1,6 +1,6 @@
 # GEOframeUtils
 
-`@author` Francesco Serafin (sidereus3), francesco.serafin.3@gmail.com
+`@author` Francesco Serafin (sidereus3), francesco.serafin.3@gmail.com ![alt text](https://github.com/GrowWorkingHard/logos/blob/master/sidereus3_50X50.png "sidereus3")
 
 `@copyright` GNU Public License v3 AboutHydrology (Riccardo Rigon)
 
