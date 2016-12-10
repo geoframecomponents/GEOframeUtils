@@ -23,9 +23,8 @@ package it.blogspot.geoframe.utils;
  *
  * @author ftt01, dallatorre.daniele@gmail.com
  * @author sidereus, francesco.serafin.3@gmail.com
- * @version 0.1
- * @date Jun 07, 2016
- * @copyright GNU Public License v3 GWH-2b4 (Riccardo Rigon)
+ * @version 0.3.1, 06/07/16
+ * @since 0.1
  */
 public class GEOconstants {
 

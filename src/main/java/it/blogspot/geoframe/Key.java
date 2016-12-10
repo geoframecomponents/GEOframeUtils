@@ -24,29 +24,28 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import net.jcip.annotations.Immutable;
 
 /**
- * @brief Key used as ID for the nodes of the tree
- *
- * @description The Key class is <em>ThreadSafe</em> because
- *              <em>Immutable</em>. The key is stored in hexadecimal format.
- *              Converters <strong>hexToDecimal</strong> and
- *              <strong>decimalToHex</strong> have been implemented as private
- *              methods, thus the user can construct the object providing:
- *              <ul>
- *              <li>a <tt>Key</tt> object;</li>
- *              <li>an <em>hexadecimal</em> String;</li>
- *              <li>a <em>decimal</em> double value.
- *              </ul>
- *              <p>
- *              The <tt>Key</tt> works as key value for <code>Map</code>
- *              objects. The methods <code>equals(Object obj)</code> and
- *              <code>hashCode()</code> have been implemented using the library
- *              <A HREF="http://commons.apache.org/proper/commons-lang/download_lang.cgi">Apache Commons Lang</A>
- *              </p>
+ * Key used as ID for the nodes of the tree
+ * <p>
+ * The Key class is <em>ThreadSafe</em> because
+ * <em>Immutable</em>. The key is stored in hexadecimal format.
+ * Converters <strong>hexToDecimal</strong> and
+ * <strong>decimalToHex</strong> have been implemented as private
+ * methods, thus the user can construct the object providing:
+ * <ul>
+ * <li>a <tt>Key</tt> object;</li>
+ * <li>an <em>hexadecimal</em> String;</li>
+ * <li>a <em>decimal</em> double value.
+ * </ul>
+ * <p>
+ * The <tt>Key</tt> works as key value for <code>Map</code>
+ * objects. The methods <code>equals(Object obj)</code> and
+ * <code>hashCode()</code> have been implemented using the library
+ * <A HREF="http://commons.apache.org/proper/commons-lang/download_lang.cgi">Apache Commons Lang</A>
+ * </p>
  *
  * @author sidereus, francesco.serafin.3@gmail.com
- * @version 0.1
- * @date November 08, 2015
- * @copyright GNU Public License v3 AboutHydrology (Riccardo Rigon)
+ * @version 0.1, 11/08/2015
+ * @since 0.3.1
  */
 @Immutable
 public class Key {
@@ -54,19 +53,19 @@ public class Key {
     private final String hexKey; //!< the hexadecimal key
 
     /**
-     * @brief Constructor from a <em>decimal</em> double value
+     * Constructor from a <em>decimal</em> double value
      *
      * @param decimalKey The input value in decimal double format
      */
-    public Key (final double decimalKey) {
- 
+    public Key(final double decimalKey) {
+
         validateDoubleKey(decimalKey); // precondition
         this.hexKey = decimalToHex(decimalKey);
 
     }
 
     /**
-     * @overload
+     * @param hexKey Hexadecimal key
      */
     public Key(final String hexKey) {
 
@@ -76,9 +75,9 @@ public class Key {
     }
 
     /**
-     * @overload
+     * @param key the key
      */
-    public Key (final Key key) {
+    public Key(final Key key) {
 
         validateKey(key); // precondition
         this.hexKey = key.getString();
@@ -86,7 +85,7 @@ public class Key {
     }
 
     /**
-     * @brief Getter method key in <strong>hexadecimal</strong> format
+     * Getter method key in <strong>hexadecimal</strong> format
      *
      * @return the key in hexadecimal format as <code>String</code> object
      */
@@ -95,7 +94,7 @@ public class Key {
     }
 
     /**
-     * @brief Getter method for key in <strong>decimal</strong> format
+     * Getter method for key in <strong>decimal</strong> format
      *
      * @return the key in decimal format as <tt>Double</tt> object
      */
@@ -104,22 +103,21 @@ public class Key {
     }
 
     /**
-     * @brief Compute if the key is odd or even
+     * Compute if the key is odd or even
+     * <p>
+     * The computation is done following these steps:
+     * <ol>
+     * <li>dividing the decimal format of the key by 2;</li>
+     * <li>converting the result from <tt>Double</tt> to
+     * <tt>String</tt>;</li>
+     * <li>parsing the <tt>String</tt> through regular expression,
+     * splitting <strong>integer</strong> part and
+     * <strong>decimal</strong> part and saving them in an array of
+     * <tt>String</tt>;</li>
+     * <li>comparing the <strong>decimal</strong> part with 0.</li>
+     * </ol>
      *
-     * @description The computation is done following these steps:
-     *              <ol>
-     *              <li>dividing the decimal format of the key by 2;</li>
-     *              <li>converting the result from <tt>Double</tt> to
-     *              <tt>String</tt>;</li>
-     *              <li>parsing the <tt>String</tt> through regular expression,
-     *              splitting <strong>integer</strong> part and
-     *              <strong>decimal</strong> part and saving them in an array of
-     *              <tt>String</tt>;</li>
-     *              <li>comparing the <strong>decimal</strong> part with 0.</li>
-     *              </ol>
-     *
-     * @retval TRUE if the key is even
-     * @retval FALSE if the key is odd
+     * @return TRUE if the key is even, FALSE if the key is odd
      */
     public boolean isEven() {
 
@@ -132,11 +130,10 @@ public class Key {
     }
 
     /**
-     * @brief Indicates wheter some other object is <em>equal to</em> this one
+     * Indicates wheter some other object is <em>equal to</em> this one
      *
      * @param obj The reference object with which to compare
-     * @retval TRUE if this object is the same as the object argument
-     * @retval FALSE otherwise
+     * @return TRUE if this object is the same as the object argument, FALSE otherwise
      */
     @Override
     public boolean equals(Object obj) {
@@ -150,10 +147,11 @@ public class Key {
     }
 
     /**
-     * @brief Returns a hash code value for the object.
-     *
-     * @description This method is supported for the benefit of hash tables such
+     * Returns a hash code value for the object.
+     * <p>
+     * This method is supported for the benefit of hash tables such
      * as those provided by <code>HashMap</code>
+     * </p>
      *
      * @return a hash code value for this object
      */
@@ -163,13 +161,14 @@ public class Key {
     }
 
     /**
-     * @brief <strong>hexadecimal</strong> to <strong>decimal</strong> format
-     *
-     * @description The algorithm has been modified from the original version in
-     *              <A HREF=
-     *              "http://introcs.cs.princeton.edu/java/31datatype/Hex2Decimal.java.html">
-     *              Introduction to Programming in Java</A>, in order to work
-     *              with <code>double</code> data type
+     * <strong>hexadecimal</strong> to <strong>decimal</strong> format
+     * <p>
+     * The algorithm has been modified from the original version in
+     * <A HREF=
+     * "http://introcs.cs.princeton.edu/java/31datatype/Hex2Decimal.java.html">
+     * Introduction to Programming in Java</A>, in order to work
+     * with <code>double</code> data type
+     * </p>
      *
      * @return The decimal value in double
      */
@@ -190,13 +189,14 @@ public class Key {
     }
 
     /**
-     * @brief <strong>decimal</strong> to <strong>hexadecimal</strong> format
-     *
-     * @description The algorithm has been modified from the original version in
-     *              <A HREF=
-     *              "http://introcs.cs.princeton.edu/java/31datatype/Hex2Decimal.java.html">
-     *              Introduction to Programming in Java</A>, in order to work
-     *              with <code>double</code> data type
+     * <strong>decimal</strong> to <strong>hexadecimal</strong> format
+     * <p>
+     * The algorithm has been modified from the original version in
+     * <A HREF=
+     * "http://introcs.cs.princeton.edu/java/31datatype/Hex2Decimal.java.html">
+     * Introduction to Programming in Java</A>, in order to work
+     * with <code>double</code> data type
+     * </p>
      *
      * @param decimalVal The decimal value to convert in hexadecimal
      * @return The hexadecimal format of the input value
@@ -219,13 +219,11 @@ public class Key {
     }
 
     /**
-     * @brief <strong>Precondition</strong> to validate input hexadecimal string
+     * <strong>Precondition</strong> to validate input hexadecimal string
      *
-     * @param hexKey
-     *            The input hexadecimal string
-     * @exception NumberFormatException
-     *                if the input string contains characters that are not
-     *                hexadecimal symbols
+     * @param hexKey The input hexadecimal string
+     * @throws NumberFormatException if the input string contains characters that are not
+     *                               hexadecimal symbols
      */
     private void validateStringKey(final String hexKey) {
 
@@ -249,12 +247,10 @@ public class Key {
     }
 
     /**
-     * @brief <strong>Precondition</strong> to validate the input Key
+     * <strong>Precondition</strong> to validate the input Key
      *
-     * @param key
-     *            The input key
-     * @exception NullPointerException
-     *                if the input key is <code>null</code>
+     * @param key The input key
+     * @throws NullPointerException if the input key is <code>null</code>
      */
     private void validateKey(final Key key) {
 
@@ -264,12 +260,10 @@ public class Key {
     }
 
     /**
-     * @brief <strong>Precondition</strong> to validate the input decimal value
+     * <strong>Precondition</strong> to validate the input decimal value
      *
-     * @param doubleKey
-     *            The decimal key in input
-     * @exception IllegalArgumentException
-     *                if the decimal value is negative
+     * @param doubleKey The decimal key in input
+     * @throws IllegalArgumentException if the decimal value is negative
      */
     private void validateDoubleKey(final double doubleKey) {
 

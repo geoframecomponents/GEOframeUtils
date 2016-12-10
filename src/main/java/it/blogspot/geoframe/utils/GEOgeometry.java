@@ -22,9 +22,7 @@ package it.blogspot.geoframe.utils;
  *
  *
  * @author sidereus, francesco.serafin.3@gmail.com
- * @version 0.1
- * @date June 16, 2016
- * @copyright GNU Public License v3 GWH-2b4
+ * @version 0.1, 06/16/16
  */
 public class GEOgeometry {
 

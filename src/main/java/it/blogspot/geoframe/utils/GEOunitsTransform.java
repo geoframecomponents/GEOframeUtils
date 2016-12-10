@@ -22,9 +22,7 @@ package it.blogspot.geoframe.utils;
  *
  *
  * @author sidereus, francesco.serafin.3@gmail.com
- * @version 0.1
- * @date May 15, 2016
- * @copyright GNU Public License v3 GWH-2b4 (Riccardo Rigon)
+ * @version 0.1, 05/15/16
  */
 public class GEOunitsTransform {
 
