@@ -1,7 +1,31 @@
+// include the BinTray repository
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "http://dl.bintray.com/palantir/releases" }
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+        classpath 'com.palantir:gradle-gitsemver:0.7.0'
+    }
+
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
-apply plugin: 'signing'
+apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'gitsemver'
+// apply plugin: 'signing'
+
+group = "com.github.geoframecomponents"
+archivesBaseName = "GEOframeUtils"
+
+def projectName = "GEOframeUtils"
+def projectDescription = "Utilities for GEOframe developers"
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 sourceCompatibility = '1.8'
@@ -17,8 +41,9 @@ if (project.hasProperty('projVersion')) {
 
 // name with versioning of the jar file
 jar {
+    baseName = projectName
     manifest {
-        attributes 'Implementation-Title' : 'Gradle Quickstart',
+        attributes 'Implementation-Title' : projectName,
                    'Implementation-Version': version
     }
 }
@@ -65,41 +90,8 @@ dependencies {
 
 }
 
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives javadocJar, sourcesJar
-}
-
-signing {
-    sign configurations.archives
-}
-
-group = "com.github.geoframecomponents"
-archivesBaseName = "GEOframeUtils"
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
-      }
-
-      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-        authentication(userName: ossrhUsername, password: ossrhPassword)
-      }
-
-      pom.project {
+modifyPom {
+    project {
         name 'GEOframeUtils'
         packaging 'jar'
         // optionally artifactId can be defined here
@@ -131,7 +123,42 @@ uploadArchives {
             email 'dallatorre.daniele@gmail.com'
           }
         }
-      }
     }
   }
+
+nexus {
+    sign = false
+}
+
+// bintray sync
+if (hasProperty('bintrayUsername') ||
+    System.getenv().containsKey('BINTRAY_USER')) {
+    // Used by the bintray plugin
+    bintray {
+        user = System.getenv().getOrDefault('BINTRAY_USER', bintrayUsername)
+        key = System.getenv().getOrDefault('BINTRAY_KEY', bintrayApiKey)
+        publish = true
+
+        pkg {
+            repo = 'maven'
+            name = projectName
+            licenses = ['General Public License V.3 (GPL3)']
+            vcsUrl = 'https://github.com/geoframecomponents/GEOframeUtils.git'
+
+            version {
+                name = project.version
+                desc = projectDescription
+                released = new Date()
+
+                mavenCentralSync {
+                    user = System.getenv().getOrDefault('SONATYPE_USER',
+                                                        nexusUsername)
+                    password = System.getenv().getOrDefault('SONATYPE_PASSWORD',
+                                                            nexusPassword)
+                }
+            }
+        }
+
+        configurations = ['archives']
+    }
 }
