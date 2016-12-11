@@ -1,6 +1,8 @@
 GEOframeUtils
 =============
 
+|Build Status| |DOI|
+
 ``@author`` Francesco Serafin (sidereus3), francesco.serafin.3@gmail.com
 |sidereus3|
 
@@ -38,6 +40,10 @@ Users' documentation
 References
 ----------
 
+.. |Build Status| image:: https://travis-ci.org/geoframecomponents/GEOframeUtils.svg
+   :target: https://travis-ci.org/geoframecomponents/GEOframeUtils
+.. |DOI| image:: https://zenodo.org/badge/60098232.svg
+   :target: https://zenodo.org/badge/latestdoi/60098232
 .. |sidereus3| image:: https://github.com/GrowWorkingHard/logos/blob/master/sidereus3_50X50.png
 .. |ftt01| image:: https://github.com/GrowWorkingHard/logos/blob/master/ftt01_50X50.png
 

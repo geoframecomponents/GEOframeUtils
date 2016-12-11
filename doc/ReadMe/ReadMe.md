@@ -1,5 +1,8 @@
 # GEOframeUtils
 
+[![Build Status](https://travis-ci.org/geoframecomponents/GEOframeUtils.svg)](https://travis-ci.org/geoframecomponents/GEOframeUtils)
+[![DOI](https://zenodo.org/badge/60098232.svg)](https://zenodo.org/badge/latestdoi/60098232)
+
 `@author` Francesco Serafin (sidereus3), francesco.serafin.3@gmail.com ![sidereus3](https://github.com/GrowWorkingHard/logos/blob/master/sidereus3_50X50.png "sidereus3")
 
 `@author` Daniele Dalla Torre (ftt01), dallatorre.daniele@gmail.com ![ftt01](https://github.com/GrowWorkingHard/logos/blob/master/ftt01_50X50.png "ftt01")
