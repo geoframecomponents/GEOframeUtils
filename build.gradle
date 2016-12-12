@@ -19,7 +19,6 @@ apply plugin: 'maven'
 apply plugin: 'com.bmuschko.nexus'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'gitsemver'
-// apply plugin: 'signing'
 
 group = "com.github.geoframecomponents"
 archivesBaseName = "GEOframeUtils"
