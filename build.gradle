@@ -1,25 +1,12 @@
 // include the BinTray repository
-buildscript {
-    repositories {
-        jcenter()
-        maven { url "http://dl.bintray.com/palantir/releases" }
-    }
-
-    dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
-        classpath 'com.palantir:gradle-gitsemver:0.7.0'
-    }
-
+plugins {
+    id "com.jfrog.bintray" version "1.7"
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
-apply plugin: 'com.bmuschko.nexus'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'gitsemver'
-// apply plugin: 'signing'
+apply plugin: 'maven-publish'
 
 group = "com.github.geoframecomponents"
 archivesBaseName = "GEOframeUtils"
@@ -90,46 +77,6 @@ dependencies {
 
 }
 
-modifyPom {
-    project {
-        name 'GEOframeUtils'
-        packaging 'jar'
-        // optionally artifactId can be defined here
-        description 'Utils for GEOframe developers'
-        url 'https://github.com/geoframecomponents/GEOframeUtils'
-
-        scm {
-          connection 'scm:git:https://github.com/geoframecomponents/GEOframeUtils.git'
-          developerConnection 'scm:git:https://github.com/geoframecomponents/GEOframeUtils.git'
-          url 'https://github.com/geoframecomponents/GEOframeUtils'
-        }
-
-        licenses {
-          license {
-            name 'General Public License V.3 (GPL3)'
-            url 'http://www.gnu.org/licenses/gpl.html'
-          }
-        }
-
-        developers {
-          developer {
-            id 'sidereus'
-            name 'Francesco Serafin'
-            email 'francesco.serafin.3@gmail.com'
-          }
-          developer {
-            id 'ftt01'
-            name 'Daniele Dalla Torre'
-            email 'dallatorre.daniele@gmail.com'
-          }
-        }
-    }
-  }
-
-nexus {
-    sign = false
-}
-
 // bintray sync
 if (hasProperty('bintrayUsername') ||
     System.getenv().containsKey('BINTRAY_USER')) {
@@ -137,28 +84,47 @@ if (hasProperty('bintrayUsername') ||
     bintray {
         user = System.getenv().getOrDefault('BINTRAY_USER', bintrayUsername)
         key = System.getenv().getOrDefault('BINTRAY_KEY', bintrayApiKey)
+        configurations = ['deployables']
         publish = true
+        override = false // [Default: false] Whether to override version
+                         // artifacts already published
 
+        //Package configuration. The plugin will use the repo and name
+        //properties to check if the package already exists. In that case,
+        //there's no need to configure the other package properties (like
+        //userOrg, desc, etc).
         pkg {
             repo = 'maven'
             name = projectName
-            licenses = ['GPL-3.0']
+            desc = projectDescription
+            websiteUrl = 'https://geoframe.blogspot.it'
+            issueTrackerUrl = 'https://github.com/geoframecomponents/GEOframeUtils/issues'
             vcsUrl = 'https://github.com/geoframecomponents/GEOframeUtils.git'
+            licenses = ['GPL-3.0']
+            publicDownloadNumbers = true
+
+            githubRepo = 'geoframecomponents/GEOframeUtils'
+            githubReleaseNotesFile = 'ReadMe.rst'
 
             version {
                 name = project.version
-                desc = projectDescription
+                // desc = Optional - Version-specific description
                 released = new Date()
 
+                // Configuration for GPG signing
+                gpg {
+                    sign = true
+                    passphrase = System.getenv().getOrDefault('PASSPHRASE', bintrayPassphrase)
+                }
+
+                // Configuration for Maven Central sync of the version
                 mavenCentralSync {
-                    user = System.getenv().getOrDefault('SONATYPE_USER',
-                                                        nexusUsername)
-                    password = System.getenv().getOrDefault('SONATYPE_PASSWORD',
-                                                            nexusPassword)
+                    sync = true // Determines whether to sync the version to Maven Central
+                    user = System.getenv().getOrDefault('SONATYPE_USER', nexusUsername)
+                    password = System.getenv().getOrDefault('SONATYPE_PASSWORD', nexusPassword)
                 }
             }
         }
 
-        configurations = ['archives']
     }
 }
