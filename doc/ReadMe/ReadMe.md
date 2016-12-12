@@ -8,8 +8,6 @@
 
 `@author` Daniele Dalla Torre (ftt01), dallatorre.daniele@gmail.com ![ftt01](https://github.com/GrowWorkingHard/logos/blob/master/ftt01_50X50.png "ftt01")
 
-`@copyright` GNU Public License v3 AboutHydrology (Riccardo Rigon)
-
 ## Description
 
 This is a Gradle project of utils for GEOframe developers

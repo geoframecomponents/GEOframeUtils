@@ -9,8 +9,6 @@ GEOframeUtils
 ``@author`` Daniele Dalla Torre (ftt01), dallatorre.daniele@gmail.com
 |ftt01|
 
-``@copyright`` GNU Public License v3 AboutHydrology (Riccardo Rigon)
-
 Description
 -----------
 
