@@ -86,8 +86,8 @@ if (hasProperty('bintrayUsername') ||
         key = System.getenv().getOrDefault('BINTRAY_KEY', bintrayApiKey)
         configurations = ['deployables']
         publish = true
-        override = false // [Default: false] Whether to override version
-                         // artifacts already published
+        override = true // [Default: false] Whether to override version
+                        // artifacts already published
 
         //Package configuration. The plugin will use the repo and name
         //properties to check if the package already exists. In that case,
