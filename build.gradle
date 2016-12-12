@@ -150,6 +150,12 @@ if (hasProperty('bintrayUsername') ||
                 desc = projectDescription
                 released = new Date()
 
+                gpg {
+                    sign = true
+                    passphrase = System.getenv().getOrDefault('PASSPHRASE',
+                                                              bintrayPassphrase)
+                }
+
                 mavenCentralSync {
                     user = System.getenv().getOrDefault('SONATYPE_USER',
                                                         nexusUsername)
