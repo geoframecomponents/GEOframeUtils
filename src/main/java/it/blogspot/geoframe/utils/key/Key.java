@@ -16,12 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package it.blogspot.geoframe;
+package it.blogspot.geoframe.utils.key;
 
+import it.blogspot.geoframe.utils.key.pairingFunctions.CantorPairing;
+import it.blogspot.geoframe.utils.key.pairingFunctions.PairingFunction;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import net.jcip.annotations.Immutable;
+
+import java.math.BigInteger;
+import java.util.List;
 
 /**
  * Key used as ID for the nodes of the tree
@@ -51,15 +56,16 @@ import net.jcip.annotations.Immutable;
 public class Key {
 
     private final String hexKey; //!< the hexadecimal key
+    private PairingFunction pairingFunction;
 
     /**
      * Constructor from a <em>decimal</em> double value
      *
      * @param decimalKey The input value in decimal double format
      */
-    public Key(final double decimalKey) {
+    public Key(final long decimalKey) {
 
-        validateDoubleKey(decimalKey); // precondition
+        validateLongKey(decimalKey); // precondition
         this.hexKey = decimalToHex(decimalKey);
 
     }
@@ -84,6 +90,17 @@ public class Key {
 
     }
 
+    public Key(final long a, final long b) {
+
+        validateLongKey(a);
+        validateLongKey(b);
+
+        pairingFunction = new CantorPairing();
+        long result = pairingFunction.computePair(a, b);
+
+        this.hexKey = decimalToHex(result);
+    }
+
     /**
      * Getter method key in <strong>hexadecimal</strong> format
      *
@@ -98,8 +115,16 @@ public class Key {
      *
      * @return the key in decimal format as <tt>Double</tt> object
      */
-    public Double getDouble() {
-        return new Double(hexToDecimal());
+    public long getInteger() {
+        return hexToDecimal();
+    }
+
+    public List<Integer> getUnpair() {
+        if (pairingFunction != null) return pairingFunction.computeUnpair(hexToDecimal());
+        else {
+            String message = "Key has NOT been construct over pairing function";
+            throw new NullPointerException(message);
+        }
     }
 
     /**
@@ -121,7 +146,7 @@ public class Key {
      */
     public boolean isEven() {
 
-        Double division = hexToDecimal() / 2;
+        Double division = ((double) hexToDecimal()) / 2;
         String tmpString = division.toString();
         String[] result = tmpString.split("\\.");
 
@@ -172,11 +197,11 @@ public class Key {
      *
      * @return The decimal value in double
      */
-    private double hexToDecimal() {
+    private long hexToDecimal() {
 
         final String DIGITS = "0123456789ABCDEF";
         final String HEXKEY = hexKey.toUpperCase();
-        double decimalVal = 0.0;
+        long decimalVal = 0;
 
         for (int i = 0; i < HEXKEY.length(); i++) {
             char c = HEXKEY.charAt(i); // parses char by char
@@ -262,13 +287,13 @@ public class Key {
     /**
      * <strong>Precondition</strong> to validate the input decimal value
      *
-     * @param doubleKey The decimal key in input
+     * @param longKey The decimal key in input
      * @throws IllegalArgumentException if the decimal value is negative
      */
-    private void validateDoubleKey(final double doubleKey) {
+    private void validateLongKey(final long longKey) {
 
-        if (doubleKey < 0) {
-            String message = "Negative key - " + doubleKey;
+        if (longKey < 0) {
+            String message = "Negative key - " + longKey;
             message += " - are not accepted";
             throw new IllegalArgumentException(message);
         }
