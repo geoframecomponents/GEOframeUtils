@@ -12,7 +12,8 @@ GEOframeUtils
 Description
 -----------
 
-This is a Gradle project of utils for GEOframe developers
+This is a Gradle project of utils for GEOframe developers. It has been
+released on JCenter and Maven Repository
 
 To build the ReadMe file from the markdown one in the doc/ReadMe folder
 
