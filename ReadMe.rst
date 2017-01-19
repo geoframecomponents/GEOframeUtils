@@ -45,6 +45,6 @@ References
    :target: https://zenodo.org/badge/latestdoi/60098232
 .. |License (GPL version 3)| image:: https://img.shields.io/badge/license-GNU%20GPL%20version%203-blue.svg
    :target: http://opensource.org/licenses/GPL-3.0
-.. |sidereus3| image:: https://github.com/GrowWorkingHard/logos/blob/master/sidereus3_50X50.png
-.. |ftt01| image:: https://github.com/GrowWorkingHard/logos/blob/master/ftt01_50X50.png
+.. |sidereus3| image:: https://github.com/GrowWorkingHard/logos/blob/master/sidereus/sidereus3_50X50.png
+.. |ftt01| image:: https://github.com/GrowWorkingHard/logos/blob/master/ftt01/ftt01_50X50.png
 
