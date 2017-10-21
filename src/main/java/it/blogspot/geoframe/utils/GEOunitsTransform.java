@@ -22,6 +22,7 @@ package it.blogspot.geoframe.utils;
  *
  *
  * @author sidereus, francesco.serafin.3@gmail.com
+ * @author ftt01, dallatorre.daniele@gmail.com
  * @version 0.1, 05/15/16
  */
 public class GEOunitsTransform {
