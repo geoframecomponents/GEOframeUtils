@@ -106,7 +106,6 @@ public class GEOunitsTransform {
     /** Units transform from inches to millimiters.
      * @param inches
      * @return millimiters
-     * @brief Inches to millimiters
      */
     public static Double inches2millimiters(final Double inches) {
         final double millimitersOverInches = 25.4;
@@ -116,7 +115,6 @@ public class GEOunitsTransform {
     /** Units transform from millimiters to inches.
      * @param millimiters
      * @return inches
-     * @brief Millimiters to inches
      */
     public static Double millimiters2inches(final Double millimiters) {
         final double millimitersOverInches = 25.4;
@@ -126,7 +124,6 @@ public class GEOunitsTransform {
     /** Units transform from feet to meters.
      * @param feet
      * @return meters
-     * @brief Feet to meters
      */
     public static Double feet2meters(final Double feet) {
         final double metersOverFeet = 0.3048;
@@ -136,7 +133,6 @@ public class GEOunitsTransform {
     /** Units transform from meters to feet.
      * @param meters
      * @return feet
-     * @brief Meters to feet
      */
     public static Double meters2feet(final Double meters) {
         final double metersOverFeet = 0.3048;
@@ -146,7 +142,6 @@ public class GEOunitsTransform {
     /** Units transform from yards to meters.
      * @param yards
      * @return meters
-     * @brief Yards to meters
      */
     public static Double yards2meters(final Double yards) {
         final double metersOverYards = 0.9144;
@@ -156,7 +151,6 @@ public class GEOunitsTransform {
     /** Units transform from meters to yards.
      * @param meters
      * @return yards
-     * @brief  Meters to yards
      */
     public static Double meters2yards(final Double meters) {
         final double metersOverYards = 0.9144;
@@ -166,7 +160,6 @@ public class GEOunitsTransform {
     /** Units transform from miles to kilometers.
      * @param miles
      * @return kilometers
-     * @brief Miles to kilometers
      */
     public static Double miles2kilometers(final Double miles) {
         final double kilometersOverMiles = 1.609344;
@@ -176,7 +169,6 @@ public class GEOunitsTransform {
     /** Units transform from kilometers to miles.
      * @param kilometers
      * @return miles
-     * @brief Miles to kilometers
      */
     public static Double kilometers2miles(final Double kilometers) {
         final double kilometersOverMiles = 1.609344;
@@ -186,7 +178,6 @@ public class GEOunitsTransform {
     /** Units transform from square feet to square meters.
      * @param squareFeet
      * @return squareMeters
-     * @brief Square feet to square meters
      */
     public static Double squareFeet2squareMeters(final Double squareFeet) {
         final double squareMetersOverSquareFeet = 0.09290304;
@@ -196,7 +187,6 @@ public class GEOunitsTransform {
     /** Units transform from square meters to square feet.
      * @param squareMeters
      * @return squareFeet
-     * @brief Square meters to square feet
      */
     public static Double squareMeters2squareFeet(final Double squareMeters) {
         final double squareFeetOverSquareMeters = 10.7639104;
@@ -206,7 +196,6 @@ public class GEOunitsTransform {
     /** Units transform from square miles to square kilometers.
      * @param squareMiles
      * @return squareKilometers
-     * @brief Square miles to square kilometers
      */
     public static Double squareMiles2squareKilometers(final Double squareMiles) {
         final double squareKilometersOverSquareMiles = 2.589988110336;
@@ -216,7 +205,6 @@ public class GEOunitsTransform {
     /** Units transform from square kilometers to square miles.
      * @param squareKilometers
      * @return squareMiles
-     * @brief Square kilometers to square miles
      */
     public static Double squareKilometers2squareMiles(final Double squareKilometers) {
         final double squareMilesOverSquareKilometers = 0.38610216;
@@ -227,7 +215,6 @@ public class GEOunitsTransform {
      * Acre is equal to 1/640 square mile.
      * @param acres
      * @return squareMeters
-     * @brief Acres to square meters
      */
     public static Double acres2squareMeters(final Double acres) {
         final double squareMetersOverAcres = 4046.8564224;
@@ -237,7 +224,6 @@ public class GEOunitsTransform {
     /** Units transform from square meters to acres.
      * @param squareMeters
      * @return acres
-     * @brief Acres to square meters
      */
     public static Double squareMeters2acres(final Double squareMeters) {
         final double acresOverSquareMeters = 0.00024710538;
