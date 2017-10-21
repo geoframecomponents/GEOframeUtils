@@ -181,4 +181,65 @@ public class GEOunitsTransform {
         final double kilometersOverMiles = 1.609344;
         return kilometers / kilometersOverMiles;
     }
+
+    /** Units transform from square feet to square meters.
+     * @param squareFeet
+     * @return squareMeters
+     * @brief Square feet to square meters
+     */
+    public static Double squareFeet2squareMeters(final Double squareFeet) {
+        final double squareMetersOverSquareFeet = 0.09290304;
+        return squareFeet * squareMetersOverSquareFeet;
+    }
+
+    /** Units transform from square meters to square feet.
+     * @param squareMeters
+     * @return squareFeet
+     * @brief Square meters to square feet
+     */
+    public static Double squareMeters2squareFeet(final Double squareMeters) {
+        final double squareFeetOverSquareMeters = 10.7639104;
+        return squareMeters * squareFeetOverSquareMeters;
+    }
+
+    /** Units transform from square miles to square kilometers.
+     * @param squareMiles
+     * @return squareKilometers
+     * @brief Square miles to square kilometers
+     */
+    public static Double squareMiles2squareKilometers(final Double squareMiles) {
+        final double squareKilometersOverSquareMiles = 2.589988110336;
+        return squareMiles * squareKilometersOverSquareMiles;
+    }
+
+    /** Units transform from square kilometers to square miles.
+     * @param squareKilometers
+     * @return squareMiles
+     * @brief Square kilometers to square miles
+     */
+    public static Double squareKilometers2squareMiles(final Double squareKilometers) {
+        final double squareMilesOverSquareKilometers = 0.38610216;
+        return squareKilometers * squareMilesOverSquareKilometers;
+    }
+
+    /** Units transform from acres to square meters.
+     * Acre is equal to 1/640 square mile.
+     * @param acres
+     * @return squareMeters
+     * @brief Acres to square meters
+     */
+    public static Double acres2squareMeters(final Double acres) {
+        final double squareMetersOverAcres = 4046.8564224;
+        return acres * squareMetersOverAcres;
+    }
+
+    /** Units transform from square meters to acres.
+     * @param squareMeters
+     * @return acres
+     * @brief Acres to square meters
+     */
+    public static Double squareMeters2acres(final Double squareMeters) {
+        final double acresOverSquareMeters = 0.00024710538;
+        return squareMeters * acresOverSquareMeters;
+    }
 }
