@@ -139,7 +139,7 @@ if (hasProperty('bintrayUsername') ||
         publish = true
 
         pkg {
-            repo = 'maven'
+            repo = 'geoframecomponents'
             name = projectName
             licenses = ['GPL-3.0']
             vcsUrl = 'https://github.com/geoframecomponents/GEOframeUtils.git'
