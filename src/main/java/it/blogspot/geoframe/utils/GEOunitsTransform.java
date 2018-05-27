@@ -68,6 +68,13 @@ public class GEOunitsTransform {
         return inputValue * minutesOverHours;
     }
 
+    public static double meters2millimiters(final Double inputValue) {
+        GEOchecks.isNull(inputValue); //precondition
+
+        final int millimitersOverMeters = 1000;
+        return inputValue * millimitersOverMeters;
+    }
+
     public static double millimiters2meters(final Double inputValue) {
         GEOchecks.isNull(inputValue); //precondition
 
