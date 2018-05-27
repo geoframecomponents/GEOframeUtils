@@ -48,4 +48,9 @@ public class GEOconstants {
      */
     public static final double MINIMUMEXCAVATION = 2;
 
+    /**
+     * Definition of maximum excavation [m].
+     */
+    public static final double MAXIMUMEXCAVATION = 10;
+
 }
