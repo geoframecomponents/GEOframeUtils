@@ -9,14 +9,12 @@ import oms3.annotations.In;
 import oms3.annotations.Initialize;
 import oms3.annotations.Out;
 
-import org.jgrasstools.gears.libs.modules.JGTModel;
-
 /**
  *
  * @author sidereus
  * @version 0.3.1, 11/25/16
  */
-public class TreeOut extends JGTModel {
+public class TreeOut {
 
 	@In
 	public Map<Integer, double[]> in;

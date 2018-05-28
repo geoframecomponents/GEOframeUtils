@@ -25,7 +25,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import net.jcip.annotations.Immutable;
 
-import java.math.BigInteger;
 import java.util.List;
 
 /**
