@@ -90,39 +90,31 @@ dependencies {
 
 }
 
-modifyPom {
-    project {
-        name 'GEOframeUtils'
-        packaging 'jar'
-        // optionally artifactId can be defined here
-        description 'Utils for GEOframe developers'
-        url 'https://github.com/geoframecomponents/GEOframeUtils'
+def pomConfig = {
+    scm {
+      connection 'scm:git:https://github.com/geoframecomponents/GEOframeUtils.git'
+      developerConnection 'scm:git:https://github.com/geoframecomponents/GEOframeUtils.git'
+      url 'https://github.com/geoframecomponents/GEOframeUtils'
+    }
 
-        scm {
-          connection 'scm:git:https://github.com/geoframecomponents/GEOframeUtils.git'
-          developerConnection 'scm:git:https://github.com/geoframecomponents/GEOframeUtils.git'
-          url 'https://github.com/geoframecomponents/GEOframeUtils'
-        }
+    licenses {
+      license {
+        name 'General Public License V.3 (GPL3)'
+        url 'http://www.gnu.org/licenses/gpl.html'
+      }
+    }
 
-        licenses {
-          license {
-            name 'General Public License V.3 (GPL3)'
-            url 'http://www.gnu.org/licenses/gpl.html'
-          }
-        }
-
-        developers {
-          developer {
-            id 'sidereus'
-            name 'Francesco Serafin'
-            email 'francesco.serafin.3@gmail.com'
-          }
-          developer {
-            id 'ftt01'
-            name 'Daniele Dalla Torre'
-            email 'dallatorre.daniele@gmail.com'
-          }
-        }
+    developers {
+      developer {
+        id 'sidereus'
+        name 'Francesco Serafin'
+        email 'francesco.serafin.3@gmail.com'
+      }
+      developer {
+        id 'ftt01'
+        name 'Daniele Dalla Torre'
+        email 'dallatorre.daniele@gmail.com'
+      }
     }
 }
 
@@ -133,9 +125,19 @@ nexus {
 publishing {
     publications {
         MyPublication(MavenPublication) {
+            from components.java
+            artifact sourceJar
+            artifact javadocJar
             groupId 'com.github.geoframecomponents'
             artifactId 'GEOframeUtils'
             version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'Utils for GEOframe developers')
+                root.appendNode('name', 'GEOframeUtils')
+                root.appendNode('url', 'https://github.com/geoframecomponents/GEOframeUtils')
+                root.children().last() + pomConfig
+            }
         }
     }
 }
@@ -168,7 +170,6 @@ if (hasProperty('bintrayUsername') ||
                 }
 
                 mavenCentralSync {
-                    sync=false
                     user = System.getenv().getOrDefault('SONATYPE_USER',
                                                         nexusUsername)
                     password = System.getenv().getOrDefault('SONATYPE_PASSWORD',
