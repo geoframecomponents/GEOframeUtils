@@ -16,7 +16,6 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'eclipse'
-apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.bmuschko.nexus'
 apply plugin: 'com.jfrog.bintray'
@@ -125,7 +124,7 @@ modifyPom {
           }
         }
     }
-  }
+}
 
 nexus {
     sign = false
@@ -134,7 +133,6 @@ nexus {
 publishing {
     publications {
         MyPublication(MavenPublication) {
-            from components.java
             groupId 'com.github.geoframecomponents'
             artifactId 'GEOframeUtils'
             version project.version
@@ -170,6 +168,7 @@ if (hasProperty('bintrayUsername') ||
                 }
 
                 mavenCentralSync {
+                    sync=false
                     user = System.getenv().getOrDefault('SONATYPE_USER',
                                                         nexusUsername)
                     password = System.getenv().getOrDefault('SONATYPE_PASSWORD',
