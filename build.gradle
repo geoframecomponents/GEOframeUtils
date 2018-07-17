@@ -130,6 +130,17 @@ nexus {
     sign = false
 }
 
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            from components.java
+            groupId 'com.github.geoframecomponents'
+            artifactId 'GEOframeUtils'
+            version project.version
+        }
+    }
+}
+
 // bintray sync
 if (hasProperty('bintrayUsername') ||
     System.getenv().containsKey('BINTRAY_USER')) {
@@ -138,6 +149,7 @@ if (hasProperty('bintrayUsername') ||
         user = System.getenv().getOrDefault('BINTRAY_USER', bintrayUsername)
         key = System.getenv().getOrDefault('BINTRAY_KEY', bintrayApiKey)
         publish = true
+        publications = ['MyPublication']
 
         pkg {
             repo = 'geoframecomponents'
