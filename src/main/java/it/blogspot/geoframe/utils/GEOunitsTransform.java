@@ -19,7 +19,7 @@
 package it.blogspot.geoframe.utils;
 
 /**
- *
+ * This class collects static methods for units conversions
  *
  * @author sidereus, francesco.serafin.3@gmail.com
  * @author ftt01, dallatorre.daniele@gmail.com
