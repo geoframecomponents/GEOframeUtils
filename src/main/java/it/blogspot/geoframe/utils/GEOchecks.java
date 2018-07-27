@@ -19,7 +19,7 @@
 package it.blogspot.geoframe.utils;
 
 /**
- *
+ * Generic check class with public static methods
  *
  * @author sidereus, francesco.serafin.3@gmail.com
  * @version 0.3.1, 05/15/16
