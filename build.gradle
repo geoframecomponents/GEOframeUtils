@@ -48,6 +48,10 @@ jar {
     }
 }
 
+task getHomeDir {
+    println gradle.gradleHomeDir
+}
+
 // custom tasks for creating source/javadoc jars
 task sJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
