@@ -1,7 +1,7 @@
 GEOframeUtils
 =============
 
-|Build Status| |DOI| |License (GPL version 3)|
+|Build Status| |DOI| |License (GPL version 3)| |Maven Central|
 
 ``@author`` Francesco Serafin (sidereus3), francesco.serafin.3@gmail.com
 |sidereus3|
@@ -12,13 +12,14 @@ GEOframeUtils
 Description
 -----------
 
-This is a Gradle project of utils for GEOframe developers. It is deployed on JCenter and Maven Repository
+This is a Gradle project of utils for GEOframe developers. It has been
+released on JCenter and Maven Repository
 
 To build the ReadMe file from the markdown one in the doc/ReadMe folder
 
 ::
 
-    pandoc doc/ReadMe/ReadMe.md -o ReadMe.rst --bibliography=doc/ReadMe/biblio.bib
+   pandoc doc/ReadMe/ReadMe.md -o ReadMe.rst --bibliography=doc/ReadMe/biblio.bib
 
 Implementation
 ~~~~~~~~~~~~~~
@@ -26,13 +27,13 @@ Implementation
 Documentation
 -------------
 
-Developers' documentation
+Developers’ documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Linkers' documentation
+Linkers’ documentation
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Users' documentation
+Users’ documentation
 ~~~~~~~~~~~~~~~~~~~~
 
 References
@@ -44,6 +45,8 @@ References
    :target: https://zenodo.org/badge/latestdoi/60098232
 .. |License (GPL version 3)| image:: https://img.shields.io/badge/license-GNU%20GPL%20version%203-blue.svg
    :target: http://opensource.org/licenses/GPL-3.0
+.. |Maven Central| image:: https://img.shields.io/maven-central/v/com.github.geoframecomponents/GEOframeUtils.svg?label=Maven%20Central
+   :target: https://search.maven.org/search?q=g:%22com.github.geoframecomponents%22%20AND%20a:%22GEOframeUtils%22
 .. |sidereus3| image:: https://github.com/GrowWorkingHard/logos/blob/master/sidereus/sidereus3_50X50.png
 .. |ftt01| image:: https://github.com/GrowWorkingHard/logos/blob/master/ftt01/ftt01_50X50.png
 
